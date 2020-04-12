@@ -1,0 +1,14 @@
+# MySql is used as storage for
+# - write side
+#  (event sourcing, the state of FunnyBox is saved in the `cqrsdemo.journal` table each time it is modified)
+#
+# - read projection
+#   (events in `cqrsdemo.journal` table, are read + transformed and saved in `cqrsdemo.myCqrsProjection` table)
+
+mysql:
+  image: mysql:latest
+  container_name: mysql-test
+  environment:
+    - "MYSQL_ROOT_PASSWORD=root"
+  ports:
+    - "3306:3306" # credentials root:root
