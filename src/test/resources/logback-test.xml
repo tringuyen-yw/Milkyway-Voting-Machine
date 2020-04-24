@@ -1,17 +1,19 @@
 <configuration>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<!--
+			Logback Layout Configuration: http://logback.qos.ch/manual/layouts.html#coloring
+			Logback MDC, Mapped Diagnostic Context: http://logback.qos.ch/manual/mdc.html
+			-->
+			<pattern>%white(%date{ISO8601}) %highlight(%-5level) %yellow(%logger{30}) %white([%marker] [%thread]) - %cyan(%msg) %white({%mdc}) %n</pattern>
+		</encoder>
+	</appender>
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>[%date{ISO8601}] [%level] [%logger] [%marker] [%thread] - %msg {%mdc}%n</pattern>
-        </encoder>
-    </appender>
+	<logger name="com.datastax.oss.driver" level="WARN"/>
+	<logger name="org.apache.cassandra" level="ERROR"/>
+	<logger name="com.codahale.metrics" level="INFO"/>
 
-    <logger name="com.datastax.oss.driver" level="WARN"/>
-    <logger name="org.apache.cassandra" level="ERROR"/>
-    <logger name="com.codahale.metrics" level="INFO"/>
-
-    <root level="INFO">
-        <appender-ref ref="STDOUT"/>
-    </root>
-
+	<root level="INFO">
+		<appender-ref ref="STDOUT"/>
+	</root>
 </configuration>
